@@ -84,13 +84,13 @@
     </div>
 
     <div class="sub-section">
-      <h3>Footer context (compact)</h3>
-      <p class="desc">The compact bar naturally doubles as a footer attribution strip.</p>
+      <h3>Footer mode</h3>
+      <p class="desc">Full branded footer block with logo, links, and program disclaimer. Use as the last element inside your site footer.</p>
       <div class="frame">
-        <div class="mock-body" style="background:#012345; height:55px;"></div>
-        <aao-site-header mode="compact" banner-id="demo-footer-1"></aao-site-header>
+        <div class="mock-body" style="background:#012345; height:40px;"></div>
+        <aao-site-header mode="footer" banner-id="demo-footer-1"></aao-site-header>
         <code>&lt;!-- last child inside your &lt;footer&gt; --&gt;
-&lt;aao-site-header mode="compact"&gt;&lt;/aao-site-header&gt;</code>
+&lt;aao-site-header mode="footer"&gt;&lt;/aao-site-header&gt;</code>
       </div>
     </div>
   </div>
@@ -171,7 +171,7 @@
       <div style="background:#012345;padding:16px 20px;">
         <div style="height:20px;background:rgba(255,255,255,0.05);border-radius:4px;margin-bottom:10px;"></div>
       </div>
-      <aao-site-header mode="compact" banner-id="demo-fp-ftr"></aao-site-header>
+      <aao-site-header mode="footer" banner-id="demo-fp-ftr"></aao-site-header>
       <code>&lt;!-- Top of page --&gt;
 &lt;aao-site-header&gt;&lt;/aao-site-header&gt;
 &lt;aao-notification config-url="...banner.json"&gt;&lt;/aao-notification&gt;
@@ -179,7 +179,7 @@
 &lt;!-- your nav, content, footer... --&gt;
 
 &lt;!-- Bottom of footer --&gt;
-&lt;aao-site-header mode="compact"&gt;&lt;/aao-site-header&gt;</code>
+&lt;aao-site-header mode="footer"&gt;&lt;/aao-site-header&gt;</code>
     </div>
   </div>
 
@@ -199,6 +199,7 @@
 
 const STORAGE_KEY = 'aao-dismissed-';
 const TRAIN_SVG = (size=20) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="3" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><path d="m8 19-2 3"/><path d="m16 19 2 3"/><circle cx="9" cy="15" r="1"/><circle cx="15" cy="15" r="1"/></svg>`;
+const AAO_LOGO_SVG = (height=28) => { const width = Math.round(height*1463/355); return `<svg width="${width}" height="${height}" viewBox="0 0 1463 355" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M1067.81 246.375L1081.62 282.996L1120.99 285.091L1089.92 306.565L1100.66 347.725L1067.81 323.173L1034.94 347.725L1047.05 307.94L1014.61 285.091L1053.98 282.996L1067.81 246.375Z" fill="white"/><path d="M393.792 246.375L379.957 282.996L340.589 285.091L371.657 306.565L360.916 347.725L393.792 323.173L426.667 347.725L414.532 307.94L446.972 285.091L407.604 282.996L393.792 246.375Z" fill="white"/><path d="M1169.76 224.547L1178.96 248.902L1205.12 250.277L1184.47 264.55L1191.61 291.917L1169.76 275.615L1147.91 291.917L1155.97 265.467L1134.4 250.277L1160.57 248.902L1169.76 224.547Z" fill="white"/><path d="M291.823 224.547L282.629 248.902L256.463 250.277L277.117 264.55L269.971 291.917L291.823 275.615L313.674 291.917L305.613 265.467L327.182 250.277L301.016 248.902L291.823 224.547Z" fill="white"/><path d="M626.647 290.246C626.647 327.412 599.676 354.997 558.282 354.997C516.888 354.997 489.72 329.289 489.72 290.246C489.72 254.411 518.565 227 558.282 227C597.998 227 626.647 254.389 626.647 290.246ZM525.886 290.42C525.886 311.808 539.938 323.833 558.304 323.833C576.67 323.833 590.526 311.83 590.526 290.42C590.526 271.084 576.67 258.143 558.304 258.143C539.938 258.143 525.886 271.084 525.886 290.42Z" fill="white"/><path d="M677.621 229.273V274.493H725.202V229.273H759.298V352.753H725.202V304.522H677.621V352.753H643.525V229.273H677.621Z" fill="white"/><path d="M817.344 229.273V352.753H783.248V229.273H817.344Z" fill="white"/><path d="M971.171 290.246C971.171 327.412 944.2 354.997 902.806 354.997C861.412 354.997 834.244 329.289 834.244 290.246C834.244 254.411 863.089 227 902.806 227C942.522 227 971.171 254.389 971.171 290.246ZM870.388 290.42C870.388 311.808 884.44 323.833 902.806 323.833C921.172 323.833 935.028 311.83 935.028 290.42C935.028 271.084 921.172 258.143 902.806 258.143C884.44 258.143 870.388 271.084 870.388 290.42Z" fill="white"/><path d="M154.617 196.829C137.319 198.095 128.67 198.749 111.372 200.103C108.648 188.078 107.298 182.054 104.574 169.985C83.0058 171.448 72.2434 172.19 50.675 173.761C47.6902 186.528 46.2088 192.922 43.2458 205.755C25.9475 207.261 17.2983 208.046 0 209.661C19.0848 141.091 38.6053 72.629 58.5616 4.29825C76.5353 4.27643 85.5331 4.25459 103.507 4.21094C120.282 68.4824 137.319 132.688 154.617 196.807V196.829ZM98.3434 138.559C92.3086 109.992 86.3174 81.4021 80.3697 52.8128C80.1083 52.8128 79.9558 52.8128 79.6943 52.8128C72.6791 82.1223 65.7293 111.476 58.823 140.807C74.6399 139.868 82.5483 139.432 98.3652 138.559H98.3434Z" fill="white"/><path d="M276.258 188.882C244.319 190.78 212.402 192.81 180.507 194.992C180.594 131.376 180.681 67.7369 180.768 4.12016C198.35 4.09833 207.151 4.07651 224.733 4.05469C224.668 54.3807 224.58 104.707 224.515 155.011C245.234 153.941 255.604 153.418 276.345 152.457C276.323 167.014 276.301 174.303 276.279 188.882H276.258Z" fill="white"/><path d="M399.019 182.775C367.08 184.172 335.141 185.7 303.202 187.38C303.311 126.229 303.398 65.1005 303.507 3.94987C321.089 3.94987 329.891 3.92807 347.472 3.90625C347.385 52.4208 347.32 100.914 347.233 149.428C367.973 148.621 378.343 148.228 399.084 147.53C399.062 161.628 399.04 168.677 399.019 182.775Z" fill="white"/><path d="M641.836 176.321C624.494 176.518 615.823 176.649 598.503 176.932C595.78 166.173 594.407 160.783 591.684 150.002C570.094 150.329 559.288 150.525 537.676 150.962C534.691 161.917 533.188 167.395 530.203 178.373C512.861 178.809 504.19 179.049 486.827 179.595C506.282 120.954 525.889 62.3348 545.628 3.78125C563.601 3.78125 572.599 3.78125 590.573 3.78125C607.588 61.331 624.69 118.837 641.836 176.343V176.321ZM585.41 122.045C579.397 96.7948 573.405 71.5446 567.414 46.2943C567.153 46.2943 567 46.2943 566.739 46.2943C559.745 71.741 552.774 97.1876 545.824 122.634C561.663 122.372 569.593 122.263 585.431 122.067L585.41 122.045Z" fill="white"/><path d="M764.647 89.1577C776.585 93.7844 784.951 99.4586 789.766 106.202C794.581 112.946 796.999 121.741 796.999 132.587C796.999 144.831 791.771 155.088 781.335 163.381C770.877 171.696 758.045 175.799 742.838 175.777C718.372 175.777 693.906 175.864 669.44 176.017C669.462 118.576 669.484 61.1359 669.506 3.69531C690.442 3.69531 711.401 3.69531 732.337 3.69531C750.05 3.69531 764.581 7.7982 775.888 16.0258C787.217 24.2534 792.882 34.7289 792.882 47.4304C792.882 57.7313 790.638 66.0899 786.171 72.5279C781.683 78.9442 774.516 84.4874 764.668 89.1577H764.647ZM713.776 76.4563C717.414 76.4563 719.222 76.4563 722.839 76.4563C730.311 76.4563 736.281 74.4485 740.725 70.4547C745.17 66.4609 747.414 61.114 747.414 54.4141C747.414 38.9846 738.133 31.2589 719.549 31.2589C717.24 31.2589 716.085 31.2589 713.776 31.2589C713.776 49.3291 713.776 58.3861 713.776 76.4563ZM713.754 147.82C718.895 147.711 721.466 147.646 726.608 147.537C734.189 147.449 740.072 145.463 744.255 141.622C748.438 137.76 750.529 132.304 750.529 125.233C750.529 110.065 741.292 102.47 722.817 102.492C719.179 102.492 717.37 102.492 713.754 102.492C713.754 120.628 713.754 129.685 713.754 147.82Z" fill="white"/><path d="M823.726 89.1289C823.944 65.1226 826.82 47.1397 833.051 35.8131C839.282 24.4865 847.56 15.6914 857.887 9.42795C868.214 3.16449 881.264 0 896.994 0C910 0 920.501 1.83321 928.497 5.52145C936.492 9.2097 943.899 14.5783 950.74 21.6493C957.581 28.7203 962.592 37.5154 965.795 47.969C968.976 58.4445 971.023 72.7828 970.609 89.5654C969.999 114.292 968.976 143.47 950.109 162.217C936.95 175.29 918.627 181.466 896.863 181.008C874.641 180.528 856.471 173.347 843.639 159.511C826.863 141.375 823.53 113.048 823.726 89.1508V89.1289ZM870.501 78.9371C870.501 83.3674 870.501 85.5935 870.501 90.0455C870.501 108.269 871.242 120.272 872.658 126.077C874.074 131.882 877.124 136.465 881.787 139.87C886.449 143.274 892.004 145.042 898.453 145.151C903.704 145.238 908.519 143.711 912.898 140.524C917.277 137.36 920.327 132.449 922.07 125.837C923.812 119.224 924.684 107.374 924.662 90.3511C924.662 75.0961 923.9 64.206 922.418 57.7243C920.937 51.2426 917.952 45.983 913.464 41.9674C908.976 37.9518 903.508 35.9222 897.059 35.9004C887.647 35.8567 880.872 39.2831 876.732 46.1576C872.571 53.0321 870.501 63.9659 870.523 78.9371H870.501Z" fill="white"/><path d="M1140.44 186.42C1123.12 185.525 1114.47 185.089 1097.15 184.303C1094.41 172.911 1093.01 167.236 1090.27 155.888C1068.68 155.059 1057.89 154.666 1036.28 153.968C1033.32 164.967 1031.84 170.466 1028.88 181.444C1011.53 180.789 1002.86 180.484 985.521 179.938C1005.13 121.319 1024.58 62.6344 1043.84 3.90625C1061.82 3.90625 1070.81 3.92805 1088.79 3.94987C1106.2 64.7295 1123.41 125.575 1140.44 186.463V186.42ZM1083.93 126.535C1077.89 100.237 1071.84 73.9611 1065.74 47.685C1065.48 47.685 1065.32 47.685 1065.06 47.685C1058.18 73.59 1051.27 99.4951 1044.34 125.4C1060.18 125.837 1068.09 126.055 1083.93 126.557V126.535Z" fill="white"/><path d="M1293.59 195.825C1275.57 194.537 1266.55 193.926 1248.53 192.747C1236.7 161.212 1224.79 129.698 1212.78 98.228C1212.52 98.228 1212.39 98.228 1212.13 98.228C1212.17 128.978 1212.21 159.728 1212.28 190.456C1194.57 189.386 1185.72 188.863 1167.99 187.881C1167.88 126.577 1167.79 65.2738 1167.68 3.99219C1190.71 4.01401 1202.24 4.03583 1225.26 4.05766C1236.75 4.05766 1248.21 6.19641 1259.64 10.4739C1271.08 14.7514 1279.23 21.4732 1284.11 30.5956C1288.99 39.718 1291.43 49.2332 1291.45 59.054C1291.45 70.9262 1288.75 80.5942 1283.3 88.0143C1277.86 95.4344 1269.12 102.025 1257.09 107.743C1269.36 137.075 1281.54 166.428 1293.59 195.846V195.825ZM1212.11 87.7524C1226.46 88.1453 1235.55 85.8537 1239.36 80.7906C1243.15 75.7274 1245.05 69.2021 1245.05 61.2582C1245.02 43.2535 1237.01 34.1529 1221.02 33.9783C1217.42 33.9347 1215.63 33.9128 1212.04 33.891C1212.08 55.453 1212.08 66.2122 1212.13 87.7743L1212.11 87.7524Z" fill="white"/><path d="M1324.02 4.20147C1343.65 4.22329 1353.46 4.24513 1373.07 4.28878C1397.4 3.96142 1421.78 12.2109 1438.27 30.412C1456.68 50.7301 1462.43 79.8214 1462.46 106.316C1462.46 132.264 1457.29 161.508 1438.88 181.019C1421.87 199.046 1395.72 204.24 1371.58 201.774C1352.65 200.246 1343.18 199.504 1324.24 198.063C1324.18 133.443 1324.09 68.8222 1324.02 4.17969V4.20147ZM1368.84 39.8181C1368.88 81.7855 1368.9 123.753 1368.95 165.72C1371.04 165.851 1372.09 165.939 1374.2 166.07C1383.04 166.659 1392.24 163.822 1401.8 157.384C1411.34 150.967 1416.14 134.338 1416.12 107.603C1416.12 87.8526 1414.33 73.7107 1410.78 65.2648C1407.23 56.819 1402 50.4901 1395.11 46.3217C1388.23 42.1533 1381.11 40.0146 1373.78 39.9054C1371.82 39.8836 1370.84 39.8618 1368.86 39.8181H1368.84Z" fill="white"/></svg>`; };
 const ARROW_SVG = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>`;
 const X_SVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
 const NOTIF_ICONS = {
@@ -220,11 +221,12 @@ function collapse(el, onDone) {
 
 class AaoSiteHeader extends HTMLElement {
   connectedCallback() {
-    const mode = this.getAttribute('mode') || 'standard';
-    const id   = this.getAttribute('banner-id') || `site-header-${mode}`;
-    if (isDismissed(id)) return;
+    const mode    = this.getAttribute('mode') || 'standard';
     const devUrl  = this.getAttribute('dev-url')  || 'https://dev.allaboardohio.org';
     const mainUrl = this.getAttribute('main-url') || 'https://allaboardohio.org';
+    if (mode === 'footer') { this._footer(devUrl, mainUrl); return; }
+    const id = this.getAttribute('banner-id') || `site-header-${mode}`;
+    if (isDismissed(id)) return;
     mode === 'compact' ? this._compact(id, devUrl, mainUrl) : this._standard(id, devUrl, mainUrl);
   }
   _dismiss(id) { saveDismiss(id); const el = this.shadowRoot.querySelector('.root'); if (el) collapse(el, () => this.remove()); }
@@ -234,29 +236,30 @@ class AaoSiteHeader extends HTMLElement {
       <style>
         :host { display: block; width: 100%; }
         .root { background:#012345; border-bottom:2px solid #B72717; padding:10px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; box-sizing:border-box; font-family:system-ui,sans-serif; }
-        .brand { display:flex; align-items:center; gap:11px; flex-shrink:0; }
-        .brand-icon { color:#388CBB; display:flex; }
-        .brand-name { font-size:15px; font-weight:700; color:#fff; line-height:1.2; letter-spacing:-0.01em; }
-        .brand-sub  { font-size:10.5px; font-weight:600; color:#7cb9d4; letter-spacing:0.06em; text-transform:uppercase; margin-top:1px; }
+        .brand { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+        .brand-sub { font-size:10.5px; font-weight:600; color:#7cb9d4; letter-spacing:0.06em; text-transform:uppercase; }
         .actions { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
         a.btn { display:inline-flex; align-items:center; gap:5px; font-size:12.5px; font-weight:600; text-decoration:none; padding:5px 13px; border-radius:999px; border:1.5px solid transparent; transition:background .15s,color .15s,border-color .15s; white-space:nowrap; }
         a.btn-primary { background:#B72717; border-color:#B72717; color:#fff; }
         a.btn-primary:hover { background:#d42e1a; border-color:#d42e1a; }
+        a.btn-primary:focus-visible { outline:2px solid #7cb9d4; outline-offset:2px; }
         a.btn-ghost { background:transparent; border-color:rgba(255,255,255,.2); color:rgba(255,255,255,.8); }
         a.btn-ghost:hover { background:rgba(255,255,255,.08); color:#fff; border-color:rgba(255,255,255,.4); }
+        a.btn-ghost:focus-visible { outline:2px solid #7cb9d4; outline-offset:2px; }
         .dismiss { background:none; border:none; cursor:pointer; color:rgba(255,255,255,.3); display:flex; align-items:center; padding:4px; border-radius:4px; margin-left:2px; flex-shrink:0; line-height:1; }
         .dismiss:hover { color:rgba(255,255,255,.8); }
+        .dismiss:focus-visible { outline:2px solid #7cb9d4; outline-offset:2px; color:rgba(255,255,255,.8); }
       </style>
-      <div class="root">
+      <div class="root" role="region" aria-label="All Aboard Ohio Developer Program">
         <div class="brand">
-          <span class="brand-icon">${TRAIN_SVG(22)}</span>
-          <div><div class="brand-name">All Aboard Ohio</div><div class="brand-sub">Developer Program</div></div>
+          ${AAO_LOGO_SVG(28)}
+          <span class="brand-sub" aria-hidden="true">Developer Program</span>
         </div>
-        <div class="actions">
-          <a class="btn btn-primary" href="${devUrl}"  target="_blank" rel="noopener noreferrer">Developer Portal ${ARROW_SVG}</a>
-          <a class="btn btn-ghost"   href="${mainUrl}" target="_blank" rel="noopener noreferrer">allaboardohio.org ${ARROW_SVG}</a>
-          <button class="dismiss" aria-label="Dismiss">${X_SVG}</button>
-        </div>
+        <nav class="actions" aria-label="AAO site links">
+          <a class="btn btn-primary" href="${devUrl}"  target="_blank" rel="noopener noreferrer">Developer Portal <span aria-hidden="true">${ARROW_SVG}</span></a>
+          <a class="btn btn-ghost"   href="${mainUrl}" target="_blank" rel="noopener noreferrer">allaboardohio.org <span aria-hidden="true">${ARROW_SVG}</span></a>
+          <button class="dismiss" aria-label="Dismiss All Aboard Ohio program banner">${X_SVG}</button>
+        </nav>
       </div>`;
     this.shadowRoot.querySelector('.dismiss').addEventListener('click', () => this._dismiss(id));
   }
@@ -266,24 +269,54 @@ class AaoSiteHeader extends HTMLElement {
       <style>
         :host { display: block; width: 100%; }
         .root { background:#012345; border-bottom:1px solid rgba(255,255,255,.07); padding:5px 40px 5px 16px; display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:6px 10px; box-sizing:border-box; font-family:system-ui,sans-serif; font-size:12px; color:rgba(255,255,255,.65); position:relative; text-align:center; }
-        .flag { display:inline-flex; align-items:center; gap:6px; }
-        .flag svg { opacity:.6; flex-shrink:0; }
         strong { color:rgba(255,255,255,.88); font-weight:600; }
         .sep { opacity:.2; padding:0 2px; }
         a { color:#7cb9d4; font-weight:600; text-decoration:none; white-space:nowrap; }
         a:hover { text-decoration:underline; }
+        a:focus-visible { outline:2px solid #7cb9d4; outline-offset:2px; border-radius:2px; }
         .dismiss { position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:rgba(255,255,255,.25); display:flex; align-items:center; padding:4px; border-radius:4px; line-height:1; }
         .dismiss:hover { color:rgba(255,255,255,.75); }
+        .dismiss:focus-visible { outline:2px solid #7cb9d4; outline-offset:2px; color:rgba(255,255,255,.75); }
       </style>
-      <div class="root">
-        <span class="flag">${TRAIN_SVG(13)}<span>An official tool of the <strong>All Aboard Ohio Developer Program</strong></span></span>
-        <span class="sep">|</span>
+      <div class="root" role="region" aria-label="All Aboard Ohio Developer Program">
+        <span>Part of the <strong>All Aboard Ohio Developer Program</strong></span>
+        <span class="sep" aria-hidden="true">|</span>
         <a href="${devUrl}"  target="_blank" rel="noopener noreferrer">Developer Portal</a>
-        <span class="sep">·</span>
+        <span class="sep" aria-hidden="true">·</span>
         <a href="${mainUrl}" target="_blank" rel="noopener noreferrer">allaboardohio.org</a>
-        <button class="dismiss" aria-label="Dismiss">${X_SVG}</button>
+        <button class="dismiss" aria-label="Dismiss banner">${X_SVG}</button>
       </div>`;
     this.shadowRoot.querySelector('.dismiss').addEventListener('click', () => this._dismiss(id));
+  }
+  _footer(devUrl, mainUrl) {
+    this.attachShadow({ mode: 'open' });
+    this.shadowRoot.innerHTML = `
+      <style>
+        :host { display: block; width: 100%; }
+        .root { background:#012345; border-top:2px solid #B72717; padding:28px 24px; box-sizing:border-box; font-family:system-ui,sans-serif; display:flex; flex-direction:column; align-items:center; gap:16px; text-align:center; }
+        .brand { display:flex; flex-direction:column; align-items:center; gap:6px; }
+        .brand-sub { font-size:10px; font-weight:600; color:#7cb9d4; letter-spacing:0.08em; text-transform:uppercase; }
+        .links { display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:center; }
+        a { display:inline-flex; align-items:center; gap:5px; font-size:12.5px; font-weight:600; text-decoration:none; padding:5px 13px; border-radius:999px; border:1.5px solid transparent; transition:background .15s,color .15s,border-color .15s; white-space:nowrap; }
+        a.btn-primary { background:#B72717; border-color:#B72717; color:#fff; }
+        a.btn-primary:hover { background:#d42e1a; border-color:#d42e1a; }
+        a.btn-primary:focus-visible { outline:2px solid #7cb9d4; outline-offset:2px; }
+        a.btn-ghost { background:transparent; border-color:rgba(255,255,255,.2); color:rgba(255,255,255,.8); }
+        a.btn-ghost:hover { background:rgba(255,255,255,.08); color:#fff; border-color:rgba(255,255,255,.4); }
+        a.btn-ghost:focus-visible { outline:2px solid #7cb9d4; outline-offset:2px; }
+        .disclaimer { font-size:11.5px; color:rgba(255,255,255,.4); line-height:1.6; max-width:680px; }
+      </style>
+      <footer class="root" role="contentinfo" aria-label="All Aboard Ohio Developer Program attribution">
+        <div class="brand">
+          ${AAO_LOGO_SVG(30)}
+          <span class="brand-sub" aria-hidden="true">Developer Program</span>
+        </div>
+        <nav class="links" aria-label="AAO site links">
+          <a class="btn-primary" href="${devUrl}" target="_blank" rel="noopener noreferrer">Developer Portal <span aria-hidden="true">${ARROW_SVG}</span></a>
+          <a class="btn-ghost"   href="${mainUrl}" target="_blank" rel="noopener noreferrer">allaboardohio.org <span aria-hidden="true">${ARROW_SVG}</span></a>
+        </nav>
+        <p class="disclaimer">Part of the All Aboard Ohio Developer Program. Developer projects are volunteer-contributed and do not necessarily represent the official viewpoints or policy positions of All Aboard Ohio.</p>
+      </footer>`;
   }
 }
 customElements.define('aao-site-header', AaoSiteHeader);
@@ -320,8 +353,10 @@ class AaoNotification extends HTMLElement {
         a:hover { text-decoration:underline; }
         .dismiss { background:none; border:none; cursor:pointer; color:${theme.dismiss}; display:flex; align-items:center; padding:4px; border-radius:4px; flex-shrink:0; margin-left:6px; line-height:1; }
         .dismiss:hover { color:${theme.text}; }
+        .dismiss:focus-visible { outline:2px solid ${theme.link}; outline-offset:2px; }
+        a:focus-visible { outline:2px solid ${theme.link}; outline-offset:2px; border-radius:2px; }
       </style>
-      <div class="root" role="status">
+      <div class="root" role="status" aria-live="polite" aria-atomic="true">
         <span class="icon">${icon}</span>
         <span class="msg">${config.message}${config.link ? ` &nbsp;<a href="${config.link}" target="_blank" rel="noopener noreferrer">${config.linkText||'Learn more'} →</a>` : ''}</span>
         <button class="dismiss" aria-label="Dismiss">${X_SVG}</button>
