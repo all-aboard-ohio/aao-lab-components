@@ -358,7 +358,7 @@ customElements.define('aao-notification', AaoNotification);
 class AaoBannerCompat extends AaoNotification {}
 try { customElements.define('aao-banner', AaoBannerCompat); } catch {}
 
- *
+/*
  * Attributes:
  *   config-url  URL to a JSON config file (see banner.json for schema)
  *   mode        "compact" | "lite" | "standard" | "dark"  (default: "standard")
