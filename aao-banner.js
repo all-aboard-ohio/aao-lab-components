@@ -74,18 +74,10 @@ class AaoSiteHeader extends HTMLElement {
     const devUrl  = this.getAttribute('dev-url')  || 'https://dev.allaboardohio.org';
     const mainUrl = this.getAttribute('main-url') || 'https://allaboardohio.org';
     if (mode === 'footer') { this._footer(devUrl, mainUrl); return; }
-    const id = this.getAttribute('banner-id') || `site-header-${mode}`;
-    if (isDismissed(id)) return;
-    mode === 'compact' ? this._compact(id, devUrl, mainUrl) : this._standard(id, devUrl, mainUrl);
+    mode === 'compact' ? this._compact(devUrl, mainUrl) : this._standard(devUrl, mainUrl);
   }
 
-  _dismiss(id) {
-    saveDismiss(id);
-    const el = this.shadowRoot.querySelector('.root');
-    if (el) collapse(el, () => this.remove());
-  }
-
-  _standard(id, devUrl, mainUrl) {
+  _standard(devUrl, mainUrl) {
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = `
       <style>
@@ -130,15 +122,6 @@ class AaoSiteHeader extends HTMLElement {
         a.btn-ghost { background: transparent; border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); }
         a.btn-ghost:hover { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.4); }
         a.btn-ghost:focus-visible { outline: 2px solid #7cb9d4; outline-offset: 2px; }
-        .dismiss {
-          background: none; border: none; cursor: pointer;
-          color: rgba(255,255,255,0.3);
-          display: flex; align-items: center; justify-content: center;
-          min-width: 44px; min-height: 44px;
-          padding: 4px; border-radius: 4px; margin-left: 2px; flex-shrink: 0; line-height: 1;
-        }
-        .dismiss:hover { color: rgba(255,255,255,0.8); }
-        .dismiss:focus-visible { outline: 2px solid #7cb9d4; outline-offset: 2px; color: rgba(255,255,255,0.8); }
         @media (max-width: 479px) {
           .root { justify-content: center; padding: 10px 16px; }
           .brand { width: 100%; justify-content: center; }
@@ -153,13 +136,11 @@ class AaoSiteHeader extends HTMLElement {
         <nav class="actions" aria-label="AAO site links">
           <a class="btn btn-primary" href="${devUrl}" target="_blank" rel="noopener noreferrer">Developer Portal <span aria-hidden="true">${ARROW_SVG}</span></a>
           <a class="btn btn-ghost"   href="${mainUrl}" target="_blank" rel="noopener noreferrer">allaboardohio.org <span aria-hidden="true">${ARROW_SVG}</span></a>
-          <button class="dismiss" aria-label="Dismiss All Aboard Ohio program banner">${X_SVG}</button>
         </nav>
       </div>`;
-    this.shadowRoot.querySelector('.dismiss').addEventListener('click', () => this._dismiss(id));
   }
 
-  _compact(id, devUrl, mainUrl) {
+  _compact(devUrl, mainUrl) {
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = `
       <style>
@@ -167,7 +148,7 @@ class AaoSiteHeader extends HTMLElement {
         .root {
           background: #012345;
           border-bottom: 1px solid rgba(255,255,255,0.07);
-          padding: 5px 40px 5px 16px;
+          padding: 5px 16px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -177,7 +158,6 @@ class AaoSiteHeader extends HTMLElement {
           font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
           font-size: 12px;
           color: rgba(255,255,255,0.65);
-          position: relative;
           text-align: center;
         }
         strong { color: rgba(255,255,255,0.88); font-weight: 600; }
@@ -185,26 +165,8 @@ class AaoSiteHeader extends HTMLElement {
         a { color: #7cb9d4; font-weight: 600; text-decoration: none; white-space: nowrap; }
         a:hover { text-decoration: underline; }
         a:focus-visible { outline: 2px solid #7cb9d4; outline-offset: 2px; border-radius: 2px; }
-        .dismiss {
-          position: absolute;
-          right: 4px;
-          top: 50%;
-          transform: translateY(-50%);
-          background: none;
-          border: none;
-          cursor: pointer;
-          color: rgba(255,255,255,0.25);
-          display: flex;
-          align-items: center; justify-content: center;
-          min-width: 44px; min-height: 44px;
-          padding: 4px;
-          border-radius: 4px;
-          line-height: 1;
-        }
-        .dismiss:hover { color: rgba(255,255,255,0.75); }
-        .dismiss:focus-visible { outline: 2px solid #7cb9d4; outline-offset: 2px; color: rgba(255,255,255,0.75); }
         @media (max-width: 479px) {
-          .root { padding: 6px 44px 6px 12px; }
+          .root { padding: 6px 12px; }
         }
       </style>
       <div class="root" role="region" aria-label="All Aboard Ohio Developer Program">
@@ -213,9 +175,7 @@ class AaoSiteHeader extends HTMLElement {
         <a href="${devUrl}"  target="_blank" rel="noopener noreferrer">Developer Portal</a>
         <span class="sep" aria-hidden="true">·</span>
         <a href="${mainUrl}" target="_blank" rel="noopener noreferrer">allaboardohio.org</a>
-        <button class="dismiss" aria-label="Dismiss banner">${X_SVG}</button>
       </div>`;
-    this.shadowRoot.querySelector('.dismiss').addEventListener('click', () => this._dismiss(id));
   }
 
   _footer(devUrl, mainUrl) {
