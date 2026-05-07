@@ -71,7 +71,7 @@ function collapse(el, onDone) {
 class AaoSiteHeader extends HTMLElement {
   connectedCallback() {
     const mode    = this.getAttribute('mode') || 'standard';
-    const devUrl  = this.getAttribute('dev-url')  || 'https://dev.allaboardohio.org';
+    const devUrl  = this.getAttribute('dev-url')  || 'https://lab.allaboardohio.org';
     const mainUrl = this.getAttribute('main-url') || 'https://allaboardohio.org';
     if (mode === 'footer') { this._footer(devUrl, mainUrl); return; }
     mode === 'compact' ? this._compact(devUrl, mainUrl) : this._standard(devUrl, mainUrl);
@@ -128,13 +128,13 @@ class AaoSiteHeader extends HTMLElement {
           .actions { width: 100%; justify-content: center; }
         }
       </style>
-      <div class="root" role="region" aria-label="All Aboard Ohio Developer Program">
+      <div class="root" role="region" aria-label="All Aboard Ohio Data Lab">
         <div class="brand">
           ${AAO_LOGO_SVG(28)}
-          <span class="brand-sub" aria-hidden="true">Developer Program</span>
+          <span class="brand-sub" aria-hidden="true">Data Lab</span>
         </div>
         <nav class="actions" aria-label="AAO site links">
-          <a class="btn btn-primary" href="${devUrl}" target="_blank" rel="noopener noreferrer">Developer Portal <span aria-hidden="true">${ARROW_SVG}</span></a>
+          <a class="btn btn-primary" href="${devUrl}" target="_blank" rel="noopener noreferrer">AAO Lab <span aria-hidden="true">${ARROW_SVG}</span></a>
           <a class="btn btn-ghost"   href="${mainUrl}" target="_blank" rel="noopener noreferrer">allaboardohio.org <span aria-hidden="true">${ARROW_SVG}</span></a>
         </nav>
       </div>`;
@@ -169,10 +169,10 @@ class AaoSiteHeader extends HTMLElement {
           .root { padding: 6px 12px; }
         }
       </style>
-      <div class="root" role="region" aria-label="All Aboard Ohio Developer Program">
-        <span>Part of the <strong>All Aboard Ohio Developer Program</strong></span>
+      <div class="root" role="region" aria-label="All Aboard Ohio Data Lab">
+        <span>Part of the <strong>All Aboard Ohio Data Lab</strong></span>
         <span class="sep" aria-hidden="true">|</span>
-        <a href="${devUrl}"  target="_blank" rel="noopener noreferrer">Developer Portal</a>
+        <a href="${devUrl}"  target="_blank" rel="noopener noreferrer">AAO Lab</a>
         <span class="sep" aria-hidden="true">·</span>
         <a href="${mainUrl}" target="_blank" rel="noopener noreferrer">allaboardohio.org</a>
       </div>`;
@@ -217,16 +217,16 @@ class AaoSiteHeader extends HTMLElement {
           font-size: 11.5px; color: rgba(255,255,255,0.4); line-height: 1.6; max-width: 680px;
         }
       </style>
-      <footer class="root" role="contentinfo" aria-label="All Aboard Ohio Developer Program attribution">
+      <footer class="root" role="contentinfo" aria-label="All Aboard Ohio Data Lab attribution">
         <div class="brand">
           ${AAO_LOGO_SVG(30)}
-          <span class="brand-sub" aria-hidden="true">Developer Program</span>
+          <span class="brand-sub" aria-hidden="true">Data Lab</span>
         </div>
         <nav class="links" aria-label="AAO site links">
-          <a class="btn-primary" href="${devUrl}" target="_blank" rel="noopener noreferrer">Developer Portal <span aria-hidden="true">${ARROW_SVG}</span></a>
+          <a class="btn-primary" href="${devUrl}" target="_blank" rel="noopener noreferrer">AAO Lab <span aria-hidden="true">${ARROW_SVG}</span></a>
           <a class="btn-ghost"   href="${mainUrl}" target="_blank" rel="noopener noreferrer">allaboardohio.org <span aria-hidden="true">${ARROW_SVG}</span></a>
         </nav>
-        <p class="disclaimer">Part of the All Aboard Ohio Developer Program. Developer projects are volunteer-contributed and do not necessarily represent the official viewpoints or policy positions of All Aboard Ohio.</p>
+        <p class="disclaimer">Part of the All Aboard Ohio Data Lab. Projects are volunteer-contributed and do not necessarily represent the official viewpoints or policy positions of All Aboard Ohio.</p>
       </footer>`;
   }
 }
