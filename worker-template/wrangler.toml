@@ -1,0 +1,49 @@
+name = "aao-event-gate"
+main = "auth-worker.js"
+
+# Match the date when you first deploy. Update when using new CF features.
+compatibility_date = "2024-09-23"
+
+# ── KV namespace for rate limiting ────────────────────────────────────────────
+# Create it with: wrangler kv namespace create RATE_LIMIT_KV
+# Then replace the id below with the output.
+
+[[kv_namespaces]]
+binding = "RATE_LIMIT_KV"
+id      = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+
+# For local dev with `wrangler dev`, use a preview namespace:
+# preview_id = "REPLACE_WITH_YOUR_PREVIEW_KV_NAMESPACE_ID"
+
+# ── Public environment variables ─────────────────────────────────────────────
+# These are NOT secret — they're embedded in the Worker source at deploy time.
+# Do NOT put EVENT_CODE_HASH, JWT_SECRET, or TURNSTILE_SECRET here.
+
+[vars]
+
+# ALLOWED_ORIGINS: comma-separated list of origins allowed to call this Worker.
+# ⚠  Lock this down to your actual tool's origin before deploying to production.
+# Example: "https://lab.allaboardohio.org,https://canvass.allaboardohio.org"
+# Leave empty only for local development with `wrangler dev`.
+ALLOWED_ORIGINS = "https://lab.allaboardohio.org"
+
+# EVENT_NAME: a short label embedded in the issued JWT (for logging only — not
+# visible to users). Change this before each event.
+EVENT_NAME = "AAO Canvass"
+
+# TTL_HOURS: how long a session token is valid (hours). Default: 8.
+# Minimum: 1. Maximum: 72. A typical field shift is 4–8 hours.
+TTL_HOURS = "8"
+
+# ── Secrets ───────────────────────────────────────────────────────────────────
+# Set these with `wrangler secret put <NAME>` — NEVER put them in this file.
+#
+#   wrangler secret put EVENT_CODE_HASH
+#     → generate with: node generate-hash.js "your-event-code"
+#
+#   wrangler secret put JWT_SECRET
+#     → generate with: openssl rand -base64 32
+#       or in PowerShell: [Convert]::ToBase64String((1..32 | ForEach-Object { Get-Random -Maximum 256 }))
+#
+#   wrangler secret put TURNSTILE_SECRET
+#     → from Cloudflare Dashboard > Turnstile > [your site] > Secret key
