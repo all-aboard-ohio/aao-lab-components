@@ -160,6 +160,7 @@ class AaoSiteHeader extends HTMLElement {
           color: rgba(255,255,255,0.65);
           text-align: center;
         }
+        .line1 { flex-basis: 100%; }
         strong { color: rgba(255,255,255,0.88); font-weight: 600; }
         .sep { color: #7cb9d4; opacity: 0.6; padding: 0 2px; font-weight: 600; }
         a { color: #7cb9d4; font-weight: 600; text-decoration: none; white-space: nowrap; }
@@ -167,14 +168,14 @@ class AaoSiteHeader extends HTMLElement {
         a:focus-visible { outline: 2px solid #7cb9d4; outline-offset: 2px; border-radius: 2px; }
         @media (max-width: 639px) {
           .root { flex-direction: column; gap: 8px; padding: 8px 16px; }
+          .line1 { flex-basis: auto; }
         }
         @media (max-width: 479px) {
           .root { padding: 6px 12px; }
         }
       </style>
       <div class="root" role="region" aria-label="All Aboard Ohio Data Lab">
-        <span>Part of the <strong>All Aboard Ohio Data Lab</strong></span>
-        <span class="sep" aria-hidden="true">|</span>
+        <span class="line1">Part of the <strong>All Aboard Ohio Data Lab</strong></span>
         <a href="${devUrl}"  target="_blank" rel="noopener noreferrer">AAO Lab</a>
         <span class="sep" aria-hidden="true">·</span>
         <a href="${mainUrl}" target="_blank" rel="noopener noreferrer">allaboardohio.org</a>
