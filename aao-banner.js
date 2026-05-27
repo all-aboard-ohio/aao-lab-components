@@ -161,10 +161,13 @@ class AaoSiteHeader extends HTMLElement {
           text-align: center;
         }
         strong { color: rgba(255,255,255,0.88); font-weight: 600; }
-        .sep { opacity: 0.2; padding: 0 2px; }
+        .sep { color: #7cb9d4; opacity: 0.6; padding: 0 2px; font-weight: 600; }
         a { color: #7cb9d4; font-weight: 600; text-decoration: none; white-space: nowrap; }
         a:hover { text-decoration: underline; }
         a:focus-visible { outline: 2px solid #7cb9d4; outline-offset: 2px; border-radius: 2px; }
+        @media (max-width: 639px) {
+          .root { flex-direction: column; gap: 8px; padding: 8px 16px; }
+        }
         @media (max-width: 479px) {
           .root { padding: 6px 12px; }
         }
