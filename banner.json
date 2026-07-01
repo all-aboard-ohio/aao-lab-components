@@ -1,8 +1,8 @@
 {
   "active": true,
   "id": "banner-getting-started-001",
-  "message": "the All Aboard Ohio Data Lab is just getting started",
+  "message": "the All Aboard Ohio Data Lab is starting soon",
   "link": "https://join.slack.com/t/lab-allaboardohio/shared_invite/zt-3x7cyvl53-0IQMjvljmA64iNCZvhaP1w",
-  "linkText": "Join Slack",
+  "linkText": "Join us on Slack",
   "type": "info"
 }
