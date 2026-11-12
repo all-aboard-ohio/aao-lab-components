@@ -1,8 +1,14 @@
 {
-  "active": true,
+  "active": false,
   "id": "banner-getting-started-001",
   "message": "the All Aboard Ohio Data Lab is starting soon",
   "link": "https://join.slack.com/t/lab-allaboardohio/shared_invite/zt-3x7cyvl53-0IQMjvljmA64iNCZvhaP1w",
   "linkText": "Join us on Slack",
   "type": "info"
+}
+{
+  "active": true,
+  "id": "banner-new-resources-development-001",
+  "message": "All Aboard Ohio is Adding New Pages, Site Under Maintenance",
+  "type": "warning"
 }
