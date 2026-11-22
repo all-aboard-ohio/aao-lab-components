@@ -1,6 +1,8 @@
 {
   "active": true,
-  "id": "banner-new-resources-development-001",
-  "message": "All Aboard Ohio is Adding New Pages, Site Under Maintenance",
-  "type": "warning"
+  "id": "banner-giving-tuesday-2026-001",
+  "message": "Dec 1st is Giving Tuesday, the Annual Day to Support Nonprofits",
+  "link": "https://www.allaboardohio.org/givingtuesday",
+  "linkText": "Donate",
+  "type": "success"
 }
